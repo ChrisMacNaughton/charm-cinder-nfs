@@ -1,5 +1,9 @@
 options:
-  volume-dd-blocksize:
-    default: 1024
-    description: Disk block size for the volume
-    type: int
+  nfs_host:
+    default:
+    description: IP or Hostname for NFS server
+    type: string
+  nfs_path:
+    default:
+    description: Path to the NFS export
+    type: string

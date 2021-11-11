@@ -22,6 +22,7 @@ from ops_openstack.core import OSBaseCharm
 from ops.framework import StoredState
 from ops.main import main
 from ops.model import ActiveStatus
+import charmhelpers.core.templating as ch_templating
 
 
 class CinderNFSCharm(OSBaseCharm):
@@ -50,11 +51,14 @@ class CinderNFSCharm(OSBaseCharm):
         self.install_pkgs()
         self.unit.status = ActiveStatus('Unit is ready')
 
+
     def _render_config(self, config, app_name):
         # Generate the JSON with the updated configuration.
-        volume_driver = ''
+        volume_driver = 'cinder.volume.drivers.nfs.NfsDriver'
         options = [
             ('volume_driver', volume_driver),
+            ('nas_host', config['nfs_host']),
+            ('nas_share_path', config['nfs_path']),
         ]
         return json.dumps({
             "cinder": {
