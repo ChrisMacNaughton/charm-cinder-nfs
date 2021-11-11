@@ -1,0 +1,9 @@
+charm_name: cinder-nfs
+tests:
+  - tests.tests_cinder_nfs.CinderNFSTest
+configure:
+  - zaza.openstack.charm_tests.keystone.setup.add_demo_user
+gate_bundles:
+  - bionic-xena
+smoke_bundles:
+  - bionic-xena
